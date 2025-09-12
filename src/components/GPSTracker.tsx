@@ -39,7 +39,6 @@ export const GPSTracker: React.FC = () => {
   const [routeInfo, setRouteInfo] = useState<{ distance: number; duration: number } | null>(null);
   const [savedRoutes, setSavedRoutes] = useState<RouteData[]>([]);
   const [watchId, setWatchId] = useState<number | null>(null);
-  const [hasLocationPermission, setHasLocationPermission] = useState<boolean | null>(null);
   
   const lastPositionRef = useRef<Position | null>(null);
   const startTimeRef = useRef<number>(Date.now());
@@ -55,32 +54,6 @@ export const GPSTracker: React.FC = () => {
       }
     }
   }, []);
-
-  // Check geolocation permissions
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.permissions?.query({ name: 'geolocation' }).then((result) => {
-        setHasLocationPermission(result.state === 'granted');
-        if (result.state === 'denied') {
-          toast({
-            title: "Location Access Denied",
-            description: "Please enable location access to use GPS tracking.",
-            variant: "destructive",
-          });
-        }
-      }).catch(() => {
-        // Fallback for browsers without permissions API
-        setHasLocationPermission(true);
-      });
-    } else {
-      toast({
-        title: "GPS Not Available",
-        description: "Your device doesn't support GPS tracking.",
-        variant: "destructive",
-      });
-      setHasLocationPermission(false);
-    }
-  }, [toast]);
 
   // GPS position handler
   const handlePositionUpdate = useCallback((position: GeolocationPosition) => {
@@ -130,7 +103,6 @@ export const GPSTracker: React.FC = () => {
     switch (error.code) {
       case error.PERMISSION_DENIED:
         message = "Location access denied. Please enable GPS and location permissions.";
-        setHasLocationPermission(false);
         break;
       case error.POSITION_UNAVAILABLE:
         message = "Location information unavailable. Please check your GPS signal.";
@@ -297,26 +269,6 @@ export const GPSTracker: React.FC = () => {
   }, [currentPosition, toast]);
 
   const defaultCenter: [number, number] = currentPosition ? [currentPosition.lat, currentPosition.lng] : [51.505, -0.09];
-
-  if (hasLocationPermission === false) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center p-4">
-        <div className="gps-control-panel p-8 text-center max-w-md">
-          <h1 className="text-2xl font-bold mb-4 text-foreground">GPS Permission Required</h1>
-          <p className="text-muted-foreground mb-6">
-            This app needs access to your location to provide GPS tracking functionality.
-            Please enable location permissions in your browser settings.
-          </p>
-          <button 
-            onClick={() => window.location.reload()}
-            className="btn-gps-primary"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-background relative">
