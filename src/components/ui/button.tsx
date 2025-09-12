@@ -15,6 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // GPS-specific variants
+        gps: "bg-gradient-nav text-white hover:opacity-90 shadow-control",
+        success: "bg-gradient-active text-accent-foreground hover:opacity-90 shadow-control",
+        danger: "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-control",
       },
       size: {
         default: "h-10 px-4 py-2",

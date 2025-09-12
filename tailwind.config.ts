@@ -47,16 +47,24 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
+        /* GPS-specific colors */
+        gps: {
+          route: "hsl(var(--gps-route))",
+          path: "hsl(var(--gps-path))",
+          marker: "hsl(var(--gps-marker))",
+          speed: "hsl(var(--gps-speed))",
+          warning: "hsl(var(--gps-warning))",
         },
+      },
+      backgroundImage: {
+        'gradient-nav': 'var(--gradient-nav)',
+        'gradient-control': 'var(--gradient-control)', 
+        'gradient-active': 'var(--gradient-active)',
+      },
+      boxShadow: {
+        'gps': 'var(--shadow-gps)',
+        'control': 'var(--shadow-control)',
+        'active': 'var(--shadow-active)',
       },
       borderRadius: {
         lg: "var(--radius)",
