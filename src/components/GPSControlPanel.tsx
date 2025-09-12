@@ -68,28 +68,28 @@ export const GPSControlPanel: React.FC<GPSControlPanelProps> = ({
 
   return (
     <>
-      <div className="gps-control-panel p-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="gps-control-panel p-3 sm:p-4">
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
           {/* Start/Stop Button */}
           {!isTracking ? (
             <Button
               onClick={onStartTracking}
               variant="success"
-              className="flex items-center justify-center gap-2 h-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 h-12 sm:h-12 px-1 sm:px-4"
               size="lg"
             >
-              <Play size={20} />
-              <span className="hidden sm:inline">Start</span>
+              <Play size={18} />
+              <span className="text-xs sm:text-sm font-medium">Start</span>
             </Button>
           ) : (
             <Button
               onClick={onStopTracking}
               variant="danger"
-              className="flex items-center justify-center gap-2 h-12"
+              className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 h-12 sm:h-12 px-1 sm:px-4"
               size="lg"
             >
-              <Square size={20} />
-              <span className="hidden sm:inline">Stop</span>
+              <Square size={18} />
+              <span className="text-xs sm:text-sm font-medium">Stop</span>
             </Button>
           )}
 
@@ -98,22 +98,22 @@ export const GPSControlPanel: React.FC<GPSControlPanelProps> = ({
             onClick={onTogglePause}
             disabled={!isTracking}
             variant="gps"
-            className="flex items-center justify-center gap-2 h-12"
+            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 h-12 sm:h-12 px-1 sm:px-4"
             size="lg"
           >
-            <Pause size={20} />
-            <span className="hidden sm:inline">{isPaused ? 'Resume' : 'Pause'}</span>
+            <Pause size={18} />
+            <span className="text-xs sm:text-sm font-medium">{isPaused ? 'Resume' : 'Pause'}</span>
           </Button>
 
           {/* Clear Route Button */}
           <Button
             onClick={onClearRoute}
             variant="outline"
-            className="flex items-center justify-center gap-2 h-12 border-border/50 hover:bg-secondary"
+            className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 h-12 sm:h-12 px-1 sm:px-4 border-border/50 hover:bg-secondary"
             size="lg"
           >
-            <RotateCcw size={20} />
-            <span className="hidden sm:inline">Clear</span>
+            <RotateCcw size={18} />
+            <span className="text-xs sm:text-sm font-medium">Clear</span>
           </Button>
 
           {/* History Button */}
@@ -121,11 +121,11 @@ export const GPSControlPanel: React.FC<GPSControlPanelProps> = ({
             <SheetTrigger asChild>
               <Button
                 variant="outline"
-                className="flex items-center justify-center gap-2 h-12 border-border/50 hover:bg-secondary"
+                className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 h-12 sm:h-12 px-1 sm:px-4 border-border/50 hover:bg-secondary"
                 size="lg"
               >
-                <History size={20} />
-                <span className="hidden sm:inline">History</span>
+                <History size={18} />
+                <span className="text-xs sm:text-sm font-medium">History</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="bottom" className="h-[80vh] bg-card border-border">

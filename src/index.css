@@ -94,6 +94,8 @@
   .leaflet-container {
     background: hsl(var(--background));
     font-family: inherit;
+    height: 100vh !important;
+    width: 100% !important;
   }
 
   .leaflet-popup-content-wrapper,
@@ -101,6 +103,29 @@
     background: hsl(var(--card));
     color: hsl(var(--card-foreground));
     border: 1px solid hsl(var(--border));
+    border-radius: 8px;
+  }
+
+  .leaflet-popup-content {
+    margin: 8px 12px;
+    line-height: 1.4;
+  }
+
+  .leaflet-control-attribution {
+    background: hsl(var(--background) / 0.8) !important;
+    color: hsl(var(--muted-foreground)) !important;
+    font-size: 10px !important;
+  }
+
+  .leaflet-control-zoom a {
+    background: hsl(var(--card)) !important;
+    color: hsl(var(--card-foreground)) !important;
+    border-color: hsl(var(--border)) !important;
+  }
+
+  .leaflet-control-zoom a:hover {
+    background: hsl(var(--accent)) !important;
+    color: hsl(var(--accent-foreground)) !important;
   }
 
   /* Custom scrollbar for GPS interface */
@@ -125,52 +150,83 @@
 @layer components {
   /* GPS Control Panel */
   .gps-control-panel {
-    @apply bg-card/90 backdrop-blur-md border border-border/50 rounded-lg;
-    box-shadow: var(--shadow-control);
+    @apply bg-card/95 backdrop-blur-lg border border-border/50 rounded-xl shadow-gps;
   }
 
   /* GPS Metrics */
   .gps-metric {
-    @apply bg-secondary/80 backdrop-blur-sm rounded-md p-3 border border-border/30;
+    @apply bg-secondary/90 backdrop-blur-md rounded-lg p-3 border border-border/30 shadow-control;
     transition: var(--transition-smooth);
   }
 
   .gps-metric:hover {
-    @apply bg-secondary;
-    box-shadow: var(--shadow-control);
+    @apply bg-secondary/95;
+    box-shadow: var(--shadow-active);
+    transform: translateY(-1px);
   }
 
   /* GPS Button variants */
   .btn-gps-primary {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-3 font-medium;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-3 font-medium shadow-control;
     transition: var(--transition-smooth);
-    box-shadow: var(--shadow-control);
   }
 
   .btn-gps-primary:hover {
     box-shadow: var(--shadow-active);
+    transform: translateY(-1px);
   }
 
   .btn-gps-success {
     background: var(--gradient-active);
-    @apply text-accent-foreground rounded-lg px-4 py-3 font-medium;
+    @apply text-accent-foreground rounded-lg px-4 py-3 font-medium shadow-control;
     transition: var(--transition-smooth);
-    box-shadow: var(--shadow-control);
+  }
+
+  .btn-gps-success:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
   }
 
   .btn-gps-danger {
-    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg px-4 py-3 font-medium;
+    @apply bg-destructive text-destructive-foreground hover:bg-destructive/90 rounded-lg px-4 py-3 font-medium shadow-control;
     transition: var(--transition-smooth);
+  }
+
+  .btn-gps-danger:hover {
+    transform: translateY(-1px);
   }
 
   /* GPS Search Input */
   .gps-search-input {
-    @apply bg-input border-border/50 text-foreground placeholder:text-muted-foreground rounded-lg px-4 py-3;
+    @apply bg-input/90 backdrop-blur-md border-border/50 text-foreground placeholder:text-muted-foreground rounded-xl px-4 py-3 shadow-control;
     transition: var(--transition-smooth);
   }
 
   .gps-search-input:focus {
-    @apply outline-none ring-2 ring-primary border-primary;
+    @apply outline-none ring-2 ring-primary/50 border-primary/50;
     box-shadow: var(--shadow-active);
+    background: hsl(var(--input));
+  }
+
+  /* Mobile responsive improvements */
+  @media (max-width: 640px) {
+    .gps-control-panel {
+      @apply rounded-lg;
+    }
+    
+    .gps-metric {
+      @apply p-2 rounded-md;
+    }
+    
+    .gps-search-input {
+      @apply rounded-lg px-3 py-2;
+    }
+  }
+
+  /* Touch targets for mobile */
+  @media (pointer: coarse) {
+    .gps-metric {
+      @apply min-h-[44px];
+    }
   }
 }

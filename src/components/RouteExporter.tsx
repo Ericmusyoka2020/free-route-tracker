@@ -119,10 +119,10 @@ ${route.map(point => `      <trkpt lat="${point.lat}" lon="${point.lng}">
           <Button
             size="lg"
             variant="gps"
-            className="h-12 w-12 p-0 rounded-full shadow-control hover:shadow-active"
+            className="h-10 w-10 sm:h-12 sm:w-12 p-0 rounded-full shadow-control hover:shadow-active"
             disabled={route.length === 0}
           >
-          <Download size={20} />
+          <Download size={16} className="sm:w-5 sm:h-5" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent 

@@ -5,6 +5,7 @@ import { GPSMetrics } from './GPSMetrics';
 import { SearchBar } from './SearchBar';
 import { RouteExporter } from './RouteExporter';
 import { GPSMap } from './GPSMap';
+import { Footer } from './Footer';
 import { calculateDistance, calculateSpeed, calculateBearing } from '../utils/gpsUtils';
 import { useToast } from '../hooks/use-toast';
 
@@ -271,9 +272,9 @@ export const GPSTracker: React.FC = () => {
   const defaultCenter: [number, number] = currentPosition ? [currentPosition.lat, currentPosition.lng] : [51.505, -0.09];
 
   return (
-    <div className="min-h-screen bg-background relative">
+    <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Map */}
-      <div className="h-screen">
+      <div className="h-screen w-full">
         <GPSMap
           currentPosition={currentPosition || undefined}
           destination={destination || undefined}
@@ -285,12 +286,12 @@ export const GPSTracker: React.FC = () => {
       </div>
 
       {/* Search Bar */}
-      <div className="absolute top-4 left-4 right-4 z-[1000]">
+      <div className="absolute top-2 sm:top-4 left-2 right-2 sm:left-4 sm:right-4 z-[1000]">
         <SearchBar onDestinationSelect={handleDestinationSelect} />
       </div>
 
       {/* GPS Metrics */}
-      <div className="absolute top-20 left-4 z-[1000]">
+      <div className="absolute top-16 sm:top-20 left-2 sm:left-4 z-[1000] max-w-[200px] sm:max-w-none">
         <GPSMetrics
           currentSpeed={currentSpeed}
           averageSpeed={averageSpeed}
@@ -301,7 +302,7 @@ export const GPSTracker: React.FC = () => {
       </div>
 
       {/* Control Panel */}
-      <div className="absolute bottom-4 left-4 right-4 z-[1000]">
+      <div className="absolute bottom-2 sm:bottom-4 left-2 right-2 sm:left-4 sm:right-4 z-[1000]">
         <GPSControlPanel
           isTracking={isTracking}
           isPaused={isPaused}
@@ -316,10 +317,15 @@ export const GPSTracker: React.FC = () => {
 
       {/* Route Exporter */}
       {route.length > 0 && (
-        <div className="absolute bottom-4 right-4 z-[1000]">
+        <div className="absolute bottom-20 sm:bottom-4 right-2 sm:right-4 z-[1000]">
           <RouteExporter route={route} />
         </div>
       )}
+
+      {/* Footer */}
+      <div className="absolute bottom-0 left-0 right-0 z-[999]">
+        <Footer />
+      </div>
     </div>
   );
 };
