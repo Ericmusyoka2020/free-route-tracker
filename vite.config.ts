@@ -15,4 +15,19 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: "dist",
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          leaflet: ['leaflet', 'react-leaflet'],
+        },
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['leaflet', 'react-leaflet'],
+  },
 }));

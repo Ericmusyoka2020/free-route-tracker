@@ -1,6 +1,7 @@
+import React from 'react';
 import { GPSTracker } from '../components/GPSTracker';
 
-const Index = () => {
+const Index: React.FC = () => {
   return <GPSTracker />;
 };
 
